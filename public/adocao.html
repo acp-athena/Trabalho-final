@@ -59,7 +59,7 @@
                     selectInteressados.appendChild(option);
               });
           });
-      fetch('/listaPets')
+      fetch('/listarPet')
           .then(response => response.json())
           .then(data => {
               const selectPets = document.getElementById('pet');

@@ -358,7 +358,7 @@ app.post('/addAdocao', (req, res) => {
 app.get('/listaInteressados', autenticar, (req, res) => {
     res.json(listaUsuarios);
 });
-app.get('/listaPets', autenticar, (req, res) => {
+app.get('/listarPet', autenticar, (req, res) => {
     res.json(listaPet);
 });
 app.get('/addAdocao', autenticar, (req, res) => {
