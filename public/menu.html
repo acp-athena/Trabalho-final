@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <h1>MENU</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/adotante.html">Cadastrar Adotante</a></li>
+            <li><a href="/pet.html">Cadastrar Pet</a></li>
+            <li><a href="/adocao.html">Adotar um Pet</a></li>
+        </ul>
+        <div id="logoutButtonContainer">
+            <button id="logoutButton">Logout</button>
+        </div>
+    </nav>
+    <footer>
+        <p>Seu último acesso foi em</p>
+    </footer>
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            fetch('/logout', {
+                method: 'POST'
+            })
+            .then(response => {
+                window.location.href = '/login.html';
+            })
+            .catch(error => {
+                console.error('Erro ao fazer logout:', error);
+            });
+        });
+    </script>
+</body>
+</html>

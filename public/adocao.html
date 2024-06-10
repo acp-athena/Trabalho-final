@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoção</title>
+    <link rel="stylesheet" href="adocao.css">
+</head>
+<body>
+    <div class="container">
+        <form action='/addAdocao' method='POST' class="adocao-form">
+            <legend class="mb-3">Desejo de Adoção</legend>
+            <div class="form-group">
+              <label for="interessado">Interessado:</label>
+              <select id="interessado" name="interessado" required>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pet">Pet:</label>
+              <select id="pet" name="pet" required>
+              </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Adotar Pet</button>
+            </div>
+        </form>
+        <div class="listaDoacoes">
+          <h2>Lista de Desejos de Adoção</h2>
+          <ul>
+          </ul>
+        </div>
+        <div id="logoutReturnBtn">
+            <a href="/menu.html" class="return-button">Voltar ao Menu</a>
+            <button id="logoutBtn">Logout</button>
+          </div>
+      </div>
+      <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          fetch('/logout', {
+            method: 'POST'
+          })
+          .then(response => {
+            window.location.href = '/login.html';
+          })
+          .catch(error => {
+            console.error('Erro ao fazer logout:', error);
+          });
+        });
+      </script>
+    <script>
+      fetch('/listaInteressados') 
+          .then(response => response.json())
+          .then(data => {
+                const selectInteressados = document.getElementById('interessado');
+                data.forEach(interessado => {
+                    const option = document.createElement('option');
+                    option.value = interessado.nome; 
+                    option.textContent = interessado.nome;
+                    selectInteressados.appendChild(option);
+              });
+          });
+      fetch('/listaPets')
+          .then(response => response.json())
+          .then(data => {
+              const selectPets = document.getElementById('pet');
+              data.forEach(pet => {
+                  const option = document.createElement('option');
+                  option.value = pet.nomePet;
+                  option.textContent = pet.nomePet;
+                  selectPets.appendChild(option);
+              });
+          });
+
+      fetch('/addAdocao')
+          .then(response => response.json())
+          .then(data => {
+              const listaDoacao = document.querySelector('.listaDoacoes');
+              listaDoacao.innerHTML = '';
+              data.forEach(desejo => {
+                  const listaItem = document.createElement('li');
+                  listaItem.textContent = `Interessado: ${desejo.interessado} | Pet: ${desejo.pet} | Data: ${desejo.data}`;
+                  listaDoacao.appendChild(listaItem);
+              });
+          });
+    </script>
+</body>
+</html>

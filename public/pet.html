@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <div class="container">
+        <form action='/cadastrarPet' method='POST' class="cadastro-form">
+            <legend class="mb-3">Cadastro de Pets</legend>
+            <div class="form-group">
+              <label for="nomePet">Nome</label>
+              <input type="text" id="nomePet" name="nomePet" required>
+            </div>
+            <div class="form-group">
+              <label for="racaPet">Raça</label>
+              <input type="text" id="racaPet" name="racaPet" required>
+            </div>
+            <div class="form-group">
+              <label for="idadePet">Idade</label>
+              <input type="number" id="idadePet" name="idadePet" required>
+            </div>
+           
+            <div class="form-group">
+              <button type="submit">Cadastrar Pet</button>
+              <a href="/menu.html" class="return-button">Voltar ao Menu</a>
+            </div>
+        </form>
+      </div>
+</body>
+</html>
