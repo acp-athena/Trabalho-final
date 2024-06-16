@@ -118,9 +118,9 @@ app.get('/', autenticar, (req, res) => {
 
 function processaCadastroUsuario(req, res) {
     const dados = req.body; 
-    let conteudores = ``;
+    let htmlResposta = ``;
     if (!(dados.nome && dados.email && dados.telefone)) {
-        conteudores = `
+        htmlResposta = `
             <!DOCTYPE html>
             <html lang="pt-br">
             <head>
@@ -139,38 +139,38 @@ function processaCadastroUsuario(req, res) {
                         </div>
             `;
         if (!dados.nome) {
-            conteudores += `
+            htmlResposta += `
                                         <div>
                                             <p class = "text-danger">Por favor, informe o nome!</p>
                                         </div>
                 `;
         }
-        conteudores += `
+        htmlResposta += `
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" value="${dados.email}"required>
                 </div>  
                 `;
         if (!dados.email) {
-            conteudores += `
+            htmlResposta += `
                 <div>
                     <p class = "text-danger">Por favor, informe o E-mail!</p>
                 </div>
                 `;
         }
-        conteudores += `
+        htmlResposta += `
                  <div class="form-group">
                     <label for="telefone">Telefone</label>
                     <input type="tel" id="telefone" name="telefone" value="${dados.telefone}"required>
                 </div>
                `;
         if (!dados.telefone) {
-            conteudores += `
+            htmlResposta += `
             <div>
             <p class = "text-danger">Por favor, informe Um numero de telefone!</p>
             </div>`;
         }
-        conteudores += `
+        htmlResposta += `
         <div class="form-group">
             <button type="submit">Cadastrar</button>
             <a href="/menu.html" class="return-button">Retornar ao Menu</a>
@@ -179,7 +179,7 @@ function processaCadastroUsuario(req, res) {
   </div>  
   </body>
   </html>`;
-        res.end(conteudores);
+        res.end(htmlResposta);
     }
     else {
         const usuario = {
@@ -189,7 +189,7 @@ function processaCadastroUsuario(req, res) {
   
         }
         listaUsuarios.push(usuario);
-        conteudores = `
+        htmlResposta = `
     <!DOCTYPE html>
     <html lang="pt-br">
     <head>
@@ -210,7 +210,7 @@ function processaCadastroUsuario(req, res) {
             </thead>
             <tbody>`;
         for (const usuario of listaUsuarios) {
-            conteudores += `
+            htmlResposta += `
                     <tr>
                         <td>${usuario.nome}</td>
                         <td>${usuario.email}</td>
@@ -218,7 +218,7 @@ function processaCadastroUsuario(req, res) {
                     </tr>
                 `;
         }
-        conteudores += `
+        htmlResposta += `
                 </tbody>
             </table>
             <button class="buttons menu-button"><a href="/" role="button">Retornar ao Menu</a></button>
@@ -226,15 +226,15 @@ function processaCadastroUsuario(req, res) {
             <button class="buttons menu-button"><a href="/adotante.html" role="button">Continuar cadastrando</a></button>
         </body>
      </html>`;
-        res.end(conteudores);
+        res.end(htmlResposta);
     }
 }
 
 function processaCadastroPet(req, res) {
     const dados = req.body;
-    let conteudores = ``;
+    let htmlResposta = ``;
     if (!(dados.nomePet && dados.racaPet && dados.idadePet)) {
-        conteudores = `
+        htmlResposta = `
             <!DOCTYPE html>
             <html lang="pt-br">
             <head>
@@ -253,38 +253,38 @@ function processaCadastroPet(req, res) {
                             </div>
             `;
         if (!dados.nomePet) {
-            conteudores += `
+            htmlResposta += `
                                         <div>
                                             <p class = "text-danger">Por favor, informe o nome do pet!</p>
                                         </div>
                 `;
         }
-        conteudores += `
+        htmlResposta += `
                 <div class="form-group">
                     <label for="racaPet">Raça</label>
                     <input type="text" id="racaPet" name="racaPet" value="${dados.racaPet}" required>
                 </div> 
                 `;
         if (!dados.racaPet) {
-            conteudores += `
+            htmlResposta += `
                 <div>
                     <p class = "text-danger">Por favor, informe a Raça do Pet!</p>
                 </div>
                 `;
         }
-        conteudores += `
+        htmlResposta += `
                 <div class="form-group">
                     <label for="idadePet">Idade (anos)</label>
                     <input type="number" id="idadePet" name="idadePet" value="${dados.idadePet}" required>
                 </div>
                `;
         if (!dados.idadePet) {
-            conteudores += `
+            htmlResposta += `
             <div>
                 <p class = "text-danger">Por favor, informe a idade do Pet!</p>
             </div>`;
         }
-        conteudores += `
+        htmlResposta += `
         <div class="form-group">
             <button type="submit">Cadastrar Pet</button>
             <a href="/menu.html" class="return-button">Retornar ao Menu</a>
@@ -293,7 +293,7 @@ function processaCadastroPet(req, res) {
   </div>  
   </body>
   </html>`;
-        res.end(conteudores);
+        res.end(htmlResposta);
     }
     else {
         const pet = {
@@ -302,7 +302,7 @@ function processaCadastroPet(req, res) {
             idadePet: dados.idadePet
         }
         listaPet.push(pet);
-        conteudores = `
+        htmlResposta = `
     <!DOCTYPE html>
     <html lang="pt-br">
     <head>
@@ -322,7 +322,7 @@ function processaCadastroPet(req, res) {
             </thead>
             <tbody>`;
         for (const pet of listaPet) {
-            conteudores += `
+            htmlResposta += `
                     <tr>
                         <td>${pet.nomePet}</td>
                         <td>${pet.racaPet}</td>
@@ -330,7 +330,7 @@ function processaCadastroPet(req, res) {
                     </tr>
                 `;
         }
-        conteudores += `
+        htmlResposta += `
                 </tbody>
             </table>
             <button class="buttons menu-button"><a href="/" role="button">Retornar ao Menu</a></button>
@@ -338,7 +338,7 @@ function processaCadastroPet(req, res) {
             <button class="buttons menu-button"><a href="/pet.html" role="button">Continuar cadastrando pet</a></button>
         </body>
      </html>`;
-        res.end(conteudores);
+        res.end(htmlResposta);
     }
 }
 
@@ -368,5 +368,5 @@ app.get('/addAdocao', autenticar, (req, res) => {
 app.post('/cadastrar', autenticar, processaCadastroUsuario);
 app.post('/cadastrarPet', autenticar, processaCadastroPet);
 app.listen(porta, () => {
-    console.log(`Servidor executando na url http://localhost:${porta}`);
+    console.log(`Servidor rodando em http://localhost:${porta}`);
 });
