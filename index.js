@@ -7,8 +7,8 @@ import path from 'path';
 const app = express();
 const porta = 3000;
 
-var listaUsuarios = [];
-var listaPet = [];
+var listaInteressados = [];
+var listarPet = [];
 
 const addAdocao = [];
 
@@ -104,8 +104,8 @@ app.get('/', autenticar, (req, res) => {
                     <li><a href="/adocao.html">Adotar um Pet</a></li>
                 </ul>
 
-                <div id="logoutButtonContainer">
-                    <button id="logoutButton">Logout</button>
+                <div id="logoutReturnBtn">
+                    <button id="logoutBtn">Logout</button>
                 </div>
             </nav>
             <footer>
@@ -188,7 +188,7 @@ function processaCadastroUsuario(req, res) {
             telefone: dados.telefone,
   
         }
-        listaUsuarios.push(usuario);
+        listaInteressados.push(usuario);
         htmlResposta = `
     <!DOCTYPE html>
     <html lang="pt-br">
@@ -209,7 +209,7 @@ function processaCadastroUsuario(req, res) {
                 </tr>
             </thead>
             <tbody>`;
-        for (const usuario of listaUsuarios) {
+        for (const usuario of listaInteressados) {
             htmlResposta += `
                     <tr>
                         <td>${usuario.nome}</td>
@@ -301,7 +301,7 @@ function processaCadastroPet(req, res) {
             racaPet: dados.racaPet,
             idadePet: dados.idadePet
         }
-        listaPet.push(pet);
+        listarPet.push(pet);
         htmlResposta = `
     <!DOCTYPE html>
     <html lang="pt-br">
@@ -321,7 +321,7 @@ function processaCadastroPet(req, res) {
                 </tr>
             </thead>
             <tbody>`;
-        for (const pet of listaPet) {
+        for (const pet of listarPet) {
             htmlResposta += `
                     <tr>
                         <td>${pet.nomePet}</td>
@@ -356,10 +356,10 @@ app.post('/addAdocao', (req, res) => {
     res.redirect('/adocao.html');
 });
 app.get('/listaInteressados', autenticar, (req, res) => {
-    res.json(listaUsuarios);
+    res.json(listaInteressados);
 });
 app.get('/listarPet', autenticar, (req, res) => {
-    res.json(listaPet);
+    res.json(listarPet);
 });
 app.get('/addAdocao', autenticar, (req, res) => {
     res.json(addAdocao);
